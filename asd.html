@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=0">
+	<title>Parler</title>
+	<base href="/" />
+	<link rel="shortcut icon" href="images/favicon.ico" />
+	<link rel="stylesheet" href="dist/css/style.css?t=1630102653">
+	<meta name="theme-color" content="#c63240">
+	<meta name="mobile-web-app-capable" content="yes">
+
+	</head>
+
+<body>
+	<div id="loading">
+		<div id="loading-center"></div>
+	</div>
+
+	
+<header class="header">
+	<div class="header__contain">
+		<div class="header__left">
+			<a class="header__back" id="back-icon" href="#">
+				<svg class="icon">
+					<use xlink:href="svg/icons.svg#back"></use>
+				</svg>
+			</a>
+
+			<a href="/" class="header__logo" data-navigo id="logo">
+				<img src="images/parler-symbol.svg" width="45" height="45" alt="Parler">
+			</a>
+		</div>
+
+		<form class="header__search">
+			<input id="header-search" autocomplete="off" type="text" class="header__search-input" placeholder="Search Parler">
+			<button type="submit" class="header__search-button">
+				<svg class="icon">
+					<use xlink:href="svg/icons.svg#search"></use>
+				</svg>
+			</button>
+		</form>
+
+		<div class="header__right">
+			<button class="header__hamburger" id="hamburger">
+				<svg class="icon"><use xlink:href="svg/icons.svg#hamburger"></use></svg>
+			</button>
+
+			<a href="/user/researchworknk55" class="avatar small" data-navigo>
+				<img class="avatar__image" loading="lazy" src="/images/default.jpg" alt="" data-profile-pic onerror="this.onerror=null;this.src='/images/default.jpg';">
+			</a>
+		</div>
+	</div>
+</header>
+
+	<div id="parler-alert" class="alert" role="alert">
+		<div id="parler-alert-text"></div>
+	</div>
+
+	<div class="main">
+		<div class="main__sidebar">
+			
+<nav class="sidebar__nav">
+	<h3 class="mobile-only">N K</h3>
+	<h3 class="mobile-only"><span>@researchworknk55</span></h3>
+
+	<ul id="iq-sidebar-toggle" class="sidebar__menu">
+		<li class="desktop-only" data-menu-item="feed">
+			<a href="/" data-navigo>
+				<svg class="icon">
+					<use xlink:href="svg/icons.svg#feed"></use>
+				</svg>
+				<span>Feed</span>
+			</a>
+		</li>
+		<li data-menu-item="profile">
+			<a href="/user/researchworknk55" data-navigo>
+				<svg class="icon">
+					<use xlink:href="svg/icons.svg#user"></use>
+				</svg>
+				<span>Profile</span>
+			</a>
+		</li>
+		<li class="desktop-only" data-menu-item="notifications">
+			<a href="/notifications" data-navigo>
+				<svg class="icon">
+					<use xlink:href="svg/icons.svg#notifications"></use>
+				</svg>
+				<span>Notifications</span>
+
+							</a>
+		</li>
+		<li class="desktop-only" data-menu-item="discover">
+			<a href="/discover" data-navigo>
+				<svg class="icon">
+					<use xlink:href="svg/icons.svg#discover"></use>
+				</svg>
+				<span>Discover</span>
+			</a>
+		</li>
+		<li class="mobile-only" data-menu-item="hashtag-feed">
+			<a href="/hashtag-feed" data-navigo>
+				<svg class="icon">
+					<use xlink:href="svg/icons.svg#hashtag_feed"></use>
+				</svg>
+				<span>Hashtag Feed</span>
+			</a>
+		</li>
+		<li class="mobile-only" data-menu-item="people-to-follow">
+			<a href="/people-to-follow" data-navigo>
+				<svg class="icon">
+					<use xlink:href="svg/icons.svg#people_to_follow"></use>
+				</svg>
+				<span>People to Follow</span>
+			</a>
+		</li>
+		<!-- <li data-menu-item="ad-network">
+				<a href="/ad-network" data-navigo><i class="las la-bullhorn"></i><span>Ad Network</span>
+				</a>
+		</li> -->
+		<li data-menu-item="settings">
+			<a href="/settings" data-navigo>
+				<svg class="icon">
+					<use xlink:href="svg/icons.svg#settings"></use>
+				</svg>
+				<span>Settings</span>
+			</a>
+		</li>
+		<!-- <li data-menu-item="moderation">
+				<a href="/moderation" data-navigo><i class="las la-comment-alt"></i><span>Moderation</span>
+				</a>
+		</li> -->
+		<li data-menu-item="feedback">
+			<a href="#" data-bs-toggle="modal" data-bs-target="#feedback">
+				<svg class="icon">
+					<use xlink:href="svg/icons.svg#feedback"></use>
+				</svg>
+				<span>Feedback</span>
+			</a>
+		</li>
+		<li>
+			<a href="/functions/sessions/logout.php">
+				<svg class="icon">
+					<use xlink:href="svg/icons.svg#switch_accounts"></use>
+				</svg>
+				<span>Sign Out</span>
+			</a>
+		</li>
+	</ul>
+</nav>
+		</div>
+
+		<div id="content" class="main__content">
+			<div class="modal" id="feedback">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal__header">
+				<h1>Feedback</h1>
+
+				<button type="button" class="modal__close" data-bs-dismiss="modal">
+					<svg class="icon">
+						<use xlink:href="svg/icons.svg#x"></use>
+					</svg>
+				</button>
+			</div>
+
+			<form id="submit-feedback">
+				<div class="modal__body">
+					<div class="form__row">
+						<div class="radio">
+							<input type="radio" id="bug" name="feedback" checked value="bug">
+							<label for="bug">
+								Bug or Glitch
+							</label>
+						</div>
+
+						<div class="radio">
+							<input type="radio" id="featureRequest" name="feedback" value="feature_request">
+							<label for="featureRequest">
+								Feature Request
+							</label>
+						</div>
+
+						<div class="radio">
+							<input type="radio" id="support" name="feedback" value="support">
+							<label for="support">
+								Support
+							</label>
+						</div>
+
+						<div class="radio">
+							<input type="radio" id="goldBadgerequest" name="feedback" value="gold_badge_request">
+							<label for="goldBadgerequest">
+								Gold Badge Request
+							</label>
+						</div>
+
+						<div class="radio">
+							<input type="radio" id="other" name="feedback" value="other">
+							<label for="other">
+								Other
+							</label>
+						</div>
+					</div>
+
+					<div class="form__row">
+						<label>Tell us about your experience</label>
+					
+						<textarea placeholder="Please describe here" name="description"></textarea>
+					</div>
+				</div>
+
+				<div class="modal__footer">
+					<button type="submit" class="button">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>			<div class="modal" id="report-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal__header">
+				<h1>Report this content</h1>
+
+				<button type="button" class="modal__close" data-bs-dismiss="modal">
+					<svg class="icon"><use xlink:href="svg/icons.svg#x"></use></svg>
+				</button>
+			</div>
+
+			<form class="modal__body" id="report-user">
+				<input type="hidden" name="content_type" id="report_modal_content_type">
+				<input type="hidden" name="reporting_user" id="report_modal_reporting_user">
+				<input type="hidden" name="reported_user" id="report_modal_reported_user">
+				<input type="hidden" name="reported_content_identifier" id="report_modal_reported_content_identifier">
+				<div class="form__row">
+											<div class="radio">
+							<input type="radio" id="sensitive_content" name="violation-type" checked value="5">
+							<label for="sensitive_content">Sensitive Content (Nudity, Porn, Violence, Gore)</label>
+						</div>
+											<div class="radio">
+							<input type="radio" id="ip_trade_mark_violation" name="violation-type"  value="3">
+							<label for="ip_trade_mark_violation">IP/Trademark Violation, Fraud</label>
+						</div>
+											<div class="radio">
+							<input type="radio" id="threats_incitement_illegal" name="violation-type"  value="7">
+							<label for="threats_incitement_illegal">Threats, Incitement or Illegal</label>
+						</div>
+											<div class="radio">
+							<input type="radio" id="unsolicited_advertising" name="violation-type"  value="8">
+							<label for="unsolicited_advertising">Unsolicited Advertising</label>
+						</div>
+											<div class="radio">
+							<input type="radio" id="child_related" name="violation-type"  value="9">
+							<label for="child_related">Child-related Crime</label>
+						</div>
+									</div>
+
+				<div class="form__row">
+					<label>Comments about the report</label>
+					<textarea placeholder="Please provide any additional here (optional)" name="comment"></textarea>
+				</div>
+
+				<button type="submit" class="button">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+			<div id="photo-modal" class="photo-modal" onclick="this.style.display='none'">
+	<svg class="photo-display-topright icon">
+		<use xlink:href="svg/icons.svg#x"></use>
+	</svg>
+	<div class="photo-modal-content">
+		<div class="photo-modal-wrapper">
+			<img id="photo-modal-image" class="photo-modal-image">
+		</div>
+	</div>
+</div>
+			<div id="video-modal-container" class="photo-modal">
+	<svg id="video-modal-close-container" class="photo-display-topright icon">
+		<use xlink:href="svg/icons.svg#x"></use>
+	</svg>
+	<div class="photo-modal-content">
+		<div class="photo-modal-wrapper">
+			<video id="video-modal-video" class="photo-modal-image"></video>
+		</div>
+	</div>
+</div>
+
+			<div id="page"></div>
+		</div>
+
+		<div id="right-sidebar" class="main__aside">
+			
+<div id="hashtag-feed" class="card">
+	<div class="card__header">
+		<h1>Hashtag Feed</h1>
+	</div>
+
+	<div class="card__body">
+		<ul id="trendinghash" class="cloud loading"></ul>
+	</div>
+</div>
+
+<div class="card">
+	<div class="card__header">
+		<h1>People to Follow</h1>
+	</div>
+
+	<div class="card__body">
+		<ul id="trendingusers" class="user-list loading"></ul>
+	</div>
+</div>
+		</div>
+
+		<div class="desktop-only">
+			<div class="fab-container">
+				<button type="button" class="main__fab" data-bs-toggle="modal" data-bs-target="#post-modal">
+					<svg>
+						<use xlink:href="svg/icons.svg#create_parley"></use>
+					</svg>
+
+					<p class="main__fab-text">Parley...</p>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<footer class="footer">
+		<ul class="footer__links">
+			<li class="list-inline-item"><a href="https://parler.com/documents/privacy-policy-71621.pdf" target="_blank">Privacy Policy</a></li>
+			<li class="list-inline-item"><a href="https://parler.com/documents/user-agreement.pdf" target="_blank">Terms of Use</a></li>
+			<li class="list-inline-item"><a href="https://parler.com/documents/guidelines.pdf" target="_blank">Guidelines Enforcement Process</a></li>
+		</ul>
+
+		<p>&copy; 2021 Parler, Inc - All Rights Reserved.</p>
+	</footer>
+
+	<nav class="bottom-nav">
+		<button type="button" class="bottom-nav__fab" data-bs-toggle="modal" data-bs-target="#post-modal">
+			<svg>
+				<use xlink:href="svg/icons.svg#create_parley"></use>
+			</svg>
+		</button>
+
+		<ul>
+			<li data-menu-item="feed">
+				<a href="/" data-navigo>
+					<svg class="icon">
+						<use xlink:href="svg/icons.svg#feed"></use>
+					</svg>
+				</a>
+			</li>
+			<li data-menu-item="discover">
+				<a href="/discover" data-navigo>
+					<svg class="icon">
+						<use xlink:href="svg/icons.svg#discover"></use>
+					</svg>
+				</a>
+			</li>
+			<li data-menu-item="notifications">
+				<a href="/notifications" data-navigo>
+					<svg class="icon">
+						<use xlink:href="svg/icons.svg#notifications"></use>
+					</svg>
+				</a>
+			</li>
+			<li data-menu-item="search">
+				<a href="/search?type=user&s=" data-navigo>
+					<svg class="icon">
+						<use xlink:href="svg/icons.svg#search"></use>
+					</svg>
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+	<script>
+		var feedinteration = 1;
+		var pullfeedflag = 1;
+		var feedloadbuffer = 5;
+		var default_feed_length = 20;
+		var oldscroll;
+	</script>
+
+	<script src="/js/vendor/jquery.min.js"></script>
+	<script src="/js/vendor/emoji/config.js"></script>
+	<script src="/js/vendor/emoji/util.js"></script>
+	<script src="/js/vendor/emoji/jquery.emojiarea.js"></script>
+	<script src="/js/vendor/emoji/emoji-picker.js"></script>
+	<script src="/js/vendor/jquery.ui.widget.js"></script>
+	<script src="/js/vendor/jquery.fileupload.js"></script>
+	<script src="/js/vendor/jquery.Jcrop.js"></script>
+	<script src="/js/vendor/load-image.all.min.js"></script>
+	<script src="/js/vendor/navigo.min.js"></script>
+	<script src="dist/js/app.js?t=1630102653"></script>
+
+</html>
