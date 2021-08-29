@@ -6,7 +6,7 @@ sesh = requests.session()
 payload = {
     "captcha_code": "ZjNb",
     "email": "kumarnihal15@yahoo.com",
-    "password": "@Solvent5",
+    "password": "",
     "hash": "61f036c0-08da-9d1e-b6d5-ce7f3ba82df7",
     "device_id": "",
     "captcha_id": "53b420a0977016ca46c6f970242580c8d5a9c46a"
