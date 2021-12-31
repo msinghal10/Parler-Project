@@ -59,4 +59,3 @@ for x in lot:
 time_after = time.time() 
 
 print(time_after-time_now)"""
-# Cookie: _pk_id.1.4eb6=c537e2ceea449bd0.1639087612.; _jsuid=962679935; _pk_ses.1.4eb6=1; PHPSESSID=1h8pri4ksgrf7lk3ebjgrm6adm; parler_auth_token=fb2e52de155b391cd514c439b9c2610e7e22f601677c536c937a5ba8b230725a; _first_pageview=1; heatmaps_g2g_101336175=no
