@@ -12,7 +12,7 @@ lot = []
 
 def posting(username):
 
-	dt = {'page': '50',
+	dt = {'page': '1',
 		'user': ''}
 
 	headers = {'Host': 'parler.com',
@@ -31,16 +31,22 @@ def posting(username):
 	'Cache-Control': 'max-age=0, no-cache',
 	'Pragma': 'no-cache'}
 
+	pg = 1
 	dt['user'] = username
 
-	r = sesh.post('https://parler.com/pages/feed.php', data = dt, headers = headers)
-	print(r)
-	page = r.json()
-	print(page)
-	print(type(page))
-	f = open(op_file+username+".html", "w+")
-	#f.write(page)
-	f.close()
+	while True:
+		dt['page'] = str(pg)
+
+		r = sesh.post('https://parler.com/pages/feed.php', data = dt, headers = headers)
+
+		page = r.json()
+		
+		f = open(op_file+username+".html", "w+")
+		f.write(page)
+		f.close()
+		if len(page) == 0:
+			break
+		pg += 1
 
 posting("JimJordan")
 	
