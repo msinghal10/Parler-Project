@@ -1,9 +1,12 @@
 import requests, sys, threading, time
 
+#Scraping stuff
+#log_file
 
+#Requests stuff
 sesh = requests.session()
 
-
+#Threading stuff
 lot = []
 
 def posting(username):
@@ -50,6 +53,6 @@ for x in range(100):
 for x in lot:
 	x.join()
 
-time_after = time.time() """
+time_after = time.time() 
 
-print(time_after-time_now)
+print(time_after-time_now)"""
