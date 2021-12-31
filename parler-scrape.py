@@ -46,8 +46,8 @@ def posting(username):
 	f.write(page)
 	f.close()
 
-print("Calling post")
-posting("LightsOfLiberty")
+print("crrrrrrrrrrr")
+posting("crrrrrrrrrrr")
 	
 """ time_now = time.time()
 
