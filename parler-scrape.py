@@ -6,20 +6,19 @@ sesh = requests.session()
 
 lot = []
 
-dt = '''-----------------------------5168501532397187871124942904
-Content-Disposition: form-data; name="page"
+def posting(username):
 
-1
------------------------------5168501532397187871124942904
-Content-Disposition: form-data; name="user"
+	dt = '''-----------------------------5168501532397187871124942904
+	Content-Disposition: form-data; name="page"
 
-Lightsofliberty
------------------------------5168501532397187871124942904--
-'''
+	1
+	-----------------------------5168501532397187871124942904
+	Content-Disposition: form-data; name="user"
 
+	%s
+	-----------------------------5168501532397187871124942904--
+	'''
 
-
-def posting():
 	headers = {'Host': 'parler.com',
 	'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:95.0) Gecko/20100101 Firefox/95.0',
 	'Accept': 'application/json, text/plain, */*',
@@ -36,9 +35,13 @@ def posting():
 	'Sec-Fetch-Site': 'same-origin',
 	'Pragma': 'no-cache',
 	'Cache-Control': 'no-cache'}
-	r = sesh.post('https://parler.com/pages/feed.php', data = dt, headers = headers)
+
+	r = sesh.post('https://parler.com/pages/feed.php', data = dt%username, headers = headers)
+	print(r.text)
+
+posting("LightsOfLiberty")
 	
-time_now = time.time()
+""" time_now = time.time()
 
 for x in range(100):
 	lot.append(threading.Thread(target=posting))
@@ -46,8 +49,7 @@ for x in range(100):
 
 for x in lot:
 	x.join()
-time_after = time.time()
+
+time_after = time.time() """
 
 print(time_after-time_now)
-
-# Cookie: _pk_id.1.4eb6=c537e2ceea449bd0.1639087612.; _jsuid=962679935; _pk_ses.1.4eb6=1; heatmaps_g2g_101336175=no; PHPSESSID=94d2gne692jp2nmd4u7qbt8fg2; parler_auth_token=fee0a0373a46dd1e705e9c63bdbc7e5c4d7e9928c55ed99e5b48eb7c03a0295a; _first_pageview=1
