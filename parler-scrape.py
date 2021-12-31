@@ -2,13 +2,19 @@ import requests, sys, threading, time
 
 #Scraping stuff
 op_file = 'data/'
+
 #log_file
 log_file = 'logs/'
+
 #Requests stuff
 sesh = requests.session()
 
+#Data file
+ip_file = ''
+
 #Threading stuff
 lot = []
+num_of_threads = 10
 
 def posting(username):
 
@@ -41,24 +47,20 @@ def posting(username):
 
 		page = r.json()
 		
-		f = open(op_file+username+".html", "w+")
-		f.write(page)
-		f.close()
 		if len(page) == 0:
 			break
 		pg += 1
 
-posting("JimJordan")
+with open(ip_file, 'r') as f:
+	users = []
+	for x in range(num_of_threads):
+		users.append(f.readline())
+
+	for i in range(num_of_threads):
+		lot.append(threading.Thread(target=posting, args = (users[i],)))
+		lot[i].start()
+
+	for thread in lot:
+		thread.join()
 	
-""" time_now = time.time()
-
-for x in range(100):
-	lot.append(threading.Thread(target=posting))
-	lot[x].start()
-
-for x in lot:
-	x.join()
-
-time_after = time.time() 
-
-print(time_after-time_now)"""
+	time.sleep(5)
