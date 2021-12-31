@@ -40,9 +40,9 @@ def posting(username):
 	'Pragma': 'no-cache',
 	'Cache-Control': 'no-cache'}
 
-	r = sesh.post('https://parler.com/pages/feed.php', data = dt%username, headers = headers)
+	r = sesh.post('https://parler.com/pages/view.php', data = dt%username, headers = headers)
 	page = r.text 
-	f = open(op_file+username, "w+")
+	f = open(op_file+username+".html", "w+")
 	f.write(page)
 	f.close()
 
