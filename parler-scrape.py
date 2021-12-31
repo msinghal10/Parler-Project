@@ -41,7 +41,10 @@ def posting(username):
 
 	r = sesh.post('https://parler.com/pages/feed.php', data = dt%username, headers = headers)
 	print(r.text)
+	print(r)
+	print(dt%username)
 
+print("Calling post")
 posting("LightsOfLiberty")
 	
 """ time_now = time.time()
