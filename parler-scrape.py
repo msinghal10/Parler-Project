@@ -57,10 +57,11 @@ with open(ip_file, 'r') as f:
 		users.append(f.readline())
 
 	for i in range(num_of_threads):
-		lot.append(threading.Thread(target=posting, args = (users[i],)))
-		lot[i].start()
+		#lot.append(threading.Thread(target=posting, args = (users[i],)))
+		#lot[i].start()
 
-	for thread in lot:
-		thread.join()
+		print(users[i])
+""" 	for thread in lot:
+		thread.join() """
 	
 	time.sleep(5)
