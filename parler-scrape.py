@@ -32,7 +32,7 @@ def posting(username):
 	'Content-Length': '282',
 	'Origin': 'https://parler.com',
 	'Connection': 'keep-alive',
-	'Cookie': '_pk_id.1.4eb6=c537e2ceea449bd0.1639087612.; _jsuid=962679935; _pk_ses.1.4eb6=1; heatmaps_g2g_101336175=no; PHPSESSID=94d2gne692jp2nmd4u7qbt8fg2; parler_auth_token=fee0a0373a46dd1e705e9c63bdbc7e5c4d7e9928c55ed99e5b48eb7c03a0295a; _first_pageview=1', #Add cookies from browser 
+	'Cookie': '_pk_id.1.4eb6=c537e2ceea449bd0.1639087612.; _jsuid=962679935; _pk_ses.1.4eb6=1; PHPSESSID=1h8pri4ksgrf7lk3ebjgrm6adm; parler_auth_token=fb2e52de155b391cd514c439b9c2610e7e22f601677c536c937a5ba8b230725a; _first_pageview=1; heatmaps_g2g_101336175=no', #Add cookies from browser 
 	'Sec-Fetch-Dest': 'empty',
 	'Sec-Fetch-Mode': 'no-cors',
 	'Sec-Fetch-Site': 'same-origin',
@@ -59,3 +59,4 @@ for x in lot:
 time_after = time.time() 
 
 print(time_after-time_now)"""
+# Cookie: _pk_id.1.4eb6=c537e2ceea449bd0.1639087612.; _jsuid=962679935; _pk_ses.1.4eb6=1; PHPSESSID=1h8pri4ksgrf7lk3ebjgrm6adm; parler_auth_token=fb2e52de155b391cd514c439b9c2610e7e22f601677c536c937a5ba8b230725a; _first_pageview=1; heatmaps_g2g_101336175=no
