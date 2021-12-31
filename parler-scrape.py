@@ -1,8 +1,9 @@
 import requests, sys, threading, time
 
 #Scraping stuff
+op_file = 'data/'
 #log_file
-
+log_file = 'logs/'
 #Requests stuff
 sesh = requests.session()
 
@@ -40,9 +41,10 @@ def posting(username):
 	'Cache-Control': 'no-cache'}
 
 	r = sesh.post('https://parler.com/pages/feed.php', data = dt%username, headers = headers)
-	print(r.text)
-	print(r)
-	print(dt%username)
+	page = r.text 
+	f = open(op_file+username, "w+")
+	f.write(page)
+	f.close()
 
 print("Calling post")
 posting("LightsOfLiberty")
