@@ -12,42 +12,37 @@ lot = []
 
 def posting(username):
 
-	dt = '''-----------------------------5168501532397187871124942904
-	Content-Disposition: form-data; name="page"
-
-	1
-	-----------------------------5168501532397187871124942904
-	Content-Disposition: form-data; name="user"
-
-	%s
-	-----------------------------5168501532397187871124942904--
-	'''
+	dt = {'page': '50',
+		'user': ''}
 
 	headers = {'Host': 'parler.com',
 	'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:95.0) Gecko/20100101 Firefox/95.0',
 	'Accept': 'application/json, text/plain, */*',
 	'Accept-Language': 'en-US,en;q=0.5',
 	'Accept-Encoding': 'gzip, deflate, br',
-	'Referer': 'https://parler.com/user/OANN',
-	'Content-Type': 'multipart/form-data; boundary=---------------------------5168501532397187871124942904',
-	'Content-Length': '282',
+	'Referer': 'https://parler.com/user/JimJordan',
+	'Content-Length': '286',
 	'Origin': 'https://parler.com',
 	'Connection': 'keep-alive',
-	'Cookie': '_pk_id.1.4eb6=c537e2ceea449bd0.1639087612.; _jsuid=962679935; _pk_ses.1.4eb6=1; PHPSESSID=1h8pri4ksgrf7lk3ebjgrm6adm; parler_auth_token=fb2e52de155b391cd514c439b9c2610e7e22f601677c536c937a5ba8b230725a; _first_pageview=1; heatmaps_g2g_101336175=no', #Add cookies from browser 
+	'Cookie': '_pk_id.1.4eb6=c537e2ceea449bd0.1639087612.; _jsuid=962679935; _pk_ses.1.4eb6=1; heatmaps_g2g_101336175=no; PHPSESSID=umvps3gr1clq4606jcm0758v7t; parler_auth_token=fd5c2dbcc73bb3d5d44bc722fa830c2b791fa0ac8636c5d7cc3897d8b63772db',
 	'Sec-Fetch-Dest': 'empty',
 	'Sec-Fetch-Mode': 'no-cors',
 	'Sec-Fetch-Site': 'same-origin',
-	'Pragma': 'no-cache',
-	'Cache-Control': 'no-cache'}
+	'Cache-Control': 'max-age=0, no-cache',
+	'Pragma': 'no-cache'}
 
-	r = sesh.post('https://parler.com/pages/view.php', data = dt%username, headers = headers)
-	page = r.text 
+	dt['user'] = username
+
+	r = sesh.post('https://parler.com/pages/feed.php', data = dt, headers = headers)
+	print(r)
+	page = r.json()
+	print(page)
+	print(type(page))
 	f = open(op_file+username+".html", "w+")
-	f.write(page)
+	#f.write(page)
 	f.close()
 
-print("crrrrrrrrrrr")
-posting("crrrrrrrrrrr")
+posting("JimJordan")
 	
 """ time_now = time.time()
 
