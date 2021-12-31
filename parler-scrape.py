@@ -10,7 +10,7 @@ log_file = 'logs/'
 sesh = requests.session()
 
 #Data file
-ip_file = ''
+ip_file = '40kf.csv'
 
 #Threading stuff
 lot = []
@@ -61,7 +61,7 @@ with open(ip_file, 'r') as f:
 		#lot[i].start()
 
 		print(users[i])
-""" 	for thread in lot:
+	""" 	for thread in lot:
 		thread.join() """
 	
 	time.sleep(5)
