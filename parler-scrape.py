@@ -55,11 +55,11 @@ def posting(username, iters):
 		with open(log_file_req, 'r') as f:
 			log_list = []
 			log_list.append(username)
-			log_list.append(r.elapsed.total_seconds())
-			log_list.append(r.status_code)
-			log_list.append(len(page))
-			log_list.append(pg)
-			log_list.append(iters)
+			log_list.append(str(r.elapsed.total_seconds()))
+			log_list.append(str(r.status_code))
+			log_list.append(str(len(page)))
+			log_list.append(str(pg))
+			log_list.append(str(iters))
 			writer_obj = writer(f)
 			writer_obj.writerow(log_list)
 
