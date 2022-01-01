@@ -18,9 +18,9 @@ users_left = True
 #Threading stuff
 lot = []
 num_of_threads = 10
-iter = 1
+iters = 1
 
-def posting(username):
+def posting(username, iters):
 
 	dt = {'page': '1',
 		'user': ''}
@@ -61,6 +61,7 @@ def posting(username):
 with open(ip_file, 'r') as f:
 	users = []
 	while users_left:
+		print("Starting iter: %d\n"%iters)
 		line = f.readline()
 		if line:
 			users.append(line.strip())
@@ -68,23 +69,25 @@ with open(ip_file, 'r') as f:
 			time_start_thread = time.time()
 
 			for user in users:
-				#lot.append(threading.Thread(target=posting, args = (user,)))
-				#lot[-1].start()
+				lot.append(threading.Thread(target=posting, args = (user,iters, )))
+				lot[-1].start()
 				print(user)
 
-			""" for thread in lot:
-				thread.join() """
+			for thread in lot:
+				thread.join() 
 
 			time_end_thread = time.time()
 
 			delay = randint(2, 5)
-			""" with open(log_file_thread,'r') as f:
+			with open(log_file_thread,'r') as f:
 				log_file_list = []
-				log_file_list.append(time_start_thread)
-				log_file_list.append(time_end_thread) """
+				log_file_list.append(str(iters))
+				log_file_list.append(str(time_start_thread))
+				log_file_list.append(str(time_end_thread))
 
-			#time.sleep(delay)
+			time.sleep(delay)
 			if not line:
 				users_left = False
-				
+
 			users = []
+			iters += 1
