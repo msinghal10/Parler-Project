@@ -78,7 +78,6 @@ with open(ip_file, 'r') as f:
 		
 		if len(users) == num_of_threads or not line:
 			time_start_thread = time.time()
-
 			for user in users:
 				lot.append(threading.Thread(target=posting, args = (user,iters, )))
 				lot[-1].start()
