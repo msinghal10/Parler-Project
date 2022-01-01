@@ -52,7 +52,7 @@ def posting(username, iters):
 		r = sesh.post('https://parler.com/pages/feed.php', data = dt, headers = headers)
 		
 		page = r.json()
-		with open(log_file_req, 'a+') as f:
+		with open(log_file_req, 'r') as f:
 			log_list = []
 			log_list.append(username)
 			log_list.append(str(r.elapsed.total_seconds()))
@@ -66,9 +66,9 @@ def posting(username, iters):
 		if len(page) == 0:
 			break
 		pg += 1
-		f = open(op_file+username+".json", "a+")
-		json.dump(page,f,indent=1)
-		f.close()
+		gf = open(op_file+username+".json", "a+")
+		json.dump(page,gf,indent=1)
+		gf.close()
 
 with open(ip_file, 'r') as f:
 	users = []
@@ -88,7 +88,7 @@ with open(ip_file, 'r') as f:
 			time_end_thread = time.time()
 
 			delay = randint(2, 5)
-			with open(log_file_thread,'a+') as f:
+			with open(log_file_thread,'r') as f:
 				log_file_list = []
 				log_file_list.append(str(iters))
 				log_file_list.append(str(time_start_thread))
