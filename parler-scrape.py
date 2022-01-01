@@ -36,7 +36,7 @@ def posting(username, iters):
 	'Content-Length': '286',
 	'Origin': 'https://parler.com',
 	'Connection': 'keep-alive',
-	'Cookie': '_pk_id.1.4eb6=c537e2ceea449bd0.1639087612.; _jsuid=962679935; _pk_ses.1.4eb6=1; heatmaps_g2g_101336175=no; PHPSESSID=umvps3gr1clq4606jcm0758v7t; parler_auth_token=fd5c2dbcc73bb3d5d44bc722fa830c2b791fa0ac8636c5d7cc3897d8b63772db',
+	'Cookie': '_pk_id.1.4eb6=c537e2ceea449bd0.1639087612.; _jsuid=962679935; _pk_ses.1.4eb6=1; _first_pageview=1; heatmaps_g2g_101336175=yes; PHPSESSID=72vu1ej2quuv9shl86umbsu3n5; parler_auth_token=d674d85888a0bbd5bb15f4defda2ee41540fdb5d748f8a6d0a9e635ead9bcf70',
 	'Sec-Fetch-Dest': 'empty',
 	'Sec-Fetch-Mode': 'no-cors',
 	'Sec-Fetch-Site': 'same-origin',
