@@ -77,7 +77,7 @@ with open(ip_file, 'r') as f:
 		line = f.readline()
 		if line:
 			users.append(line.strip())
-		elif not line or len(line) == num_of_threads:
+		elif len(line) == num_of_threads or not line:
 			time_start_thread = time.time()
 
 			for user in users:
