@@ -5,7 +5,7 @@ from random import randint
 op_file = 'data/'
 
 #log_file
-log_file = 'logs/'
+log_file_thread = 'logs/thread.csv'
 
 #Requests stuff
 sesh = requests.session()
@@ -16,6 +16,7 @@ ip_file = '40kf.csv'
 #Threading stuff
 lot = []
 num_of_threads = 10
+iter = 1
 
 def posting(username):
 
@@ -57,11 +58,21 @@ with open(ip_file, 'r') as f:
 	for x in range(num_of_threads):
 		users.append(f.readline())
 
+	time_start_thread = time.time()
+
 	for i in range(num_of_threads):
 		lot.append(threading.Thread(target=posting, args = (users[i],)))
 		lot[i].start()
 
 	for thread in lot:
 		thread.join()
-	
-	time.sleep(randint(2, 5))
+
+	time_end_thread = time.time()
+
+	delay = randint(2, 5)
+	with open(log_file_thread,'r') as f:
+		log_file_list = []
+		log_file_list.append(time_start_thread)
+		log_file_list.append(time_end_thread)
+
+	time.sleep(delay)
