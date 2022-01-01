@@ -54,25 +54,24 @@ def posting(username):
 		pg += 1
 
 with open(ip_file, 'r') as f:
-	users = []
-	for x in range(num_of_threads):
-		users.append(f.readline())
+	users = islice(f, 10)
 
 	time_start_thread = time.time()
 
-	for i in range(num_of_threads):
-		lot.append(threading.Thread(target=posting, args = (users[i],)))
-		lot[i].start()
+	for user in users:
+		#lot.append(threading.Thread(target=posting, args = (user,)))
+		#lot[-1].start()
+		print(user)
 
-	for thread in lot:
-		thread.join()
+	""" for thread in lot:
+		thread.join() """
 
 	time_end_thread = time.time()
 
 	delay = randint(2, 5)
-	with open(log_file_thread,'r') as f:
+	""" with open(log_file_thread,'r') as f:
 		log_file_list = []
 		log_file_list.append(time_start_thread)
-		log_file_list.append(time_end_thread)
+		log_file_list.append(time_end_thread) """
 
-	time.sleep(delay)
+	#time.sleep(delay)
