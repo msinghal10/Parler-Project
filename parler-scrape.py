@@ -1,4 +1,5 @@
 import requests, sys, threading, time
+from random import randint 
 
 #Scraping stuff
 op_file = 'data/'
@@ -57,11 +58,10 @@ with open(ip_file, 'r') as f:
 		users.append(f.readline())
 
 	for i in range(num_of_threads):
-		#lot.append(threading.Thread(target=posting, args = (users[i],)))
-		#lot[i].start()
+		lot.append(threading.Thread(target=posting, args = (users[i],)))
+		lot[i].start()
 
-		print(users[i])
-	""" 	for thread in lot:
-		thread.join() """
+	for thread in lot:
+		thread.join()
 	
-	time.sleep(5)
+	time.sleep(randint(2, 5))
