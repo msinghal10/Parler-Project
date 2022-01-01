@@ -1,6 +1,6 @@
 import requests, sys, threading, time
 from random import randint 
-
+from itertools import islice
 #Scraping stuff
 op_file = 'data/'
 
