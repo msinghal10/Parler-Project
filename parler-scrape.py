@@ -53,6 +53,9 @@ def posting(username):
 		if len(page) == 0:
 			break
 		pg += 1
+		f = open(op_file+username+".json", "a+")
+		json.dump(page,f,indent=1)
+		f.close()
 
 with open(ip_file, 'r') as f:
 	
