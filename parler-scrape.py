@@ -60,6 +60,8 @@ def posting(username, iters):
 			log_list.append(len(page))
 			log_list.append(pg)
 			log_list.append(iters)
+			writer_obj = writer(f)
+			writer_obj.writerow(log_list)
 
 		if len(page) == 0:
 			break
