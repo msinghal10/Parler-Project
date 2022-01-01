@@ -13,6 +13,7 @@ sesh = requests.session()
 
 #Data file
 ip_file = '40kf.csv'
+users_left = True
 
 #Threading stuff
 lot = []
@@ -58,24 +59,32 @@ def posting(username):
 		f.close()
 
 with open(ip_file, 'r') as f:
-	
-	for users in iter(lambda: tuple(islice(f, 10)), ()):
-		time_start_thread = time.time()
+	users = []
+	while users_left:
+		line = f.readline()
+		if line:
+			users.append(line.strip())
+		elif not line or len(line) == num_of_threads:
+			time_start_thread = time.time()
 
-		for user in users:
-			#lot.append(threading.Thread(target=posting, args = (user,)))
-			#lot[-1].start()
-			print(user)
+			for user in users:
+				#lot.append(threading.Thread(target=posting, args = (user,)))
+				#lot[-1].start()
+				print(user)
 
-		""" for thread in lot:
-			thread.join() """
+			""" for thread in lot:
+				thread.join() """
 
-		time_end_thread = time.time()
+			time_end_thread = time.time()
 
-		delay = randint(2, 5)
-		""" with open(log_file_thread,'r') as f:
-			log_file_list = []
-			log_file_list.append(time_start_thread)
-			log_file_list.append(time_end_thread) """
+			delay = randint(2, 5)
+			""" with open(log_file_thread,'r') as f:
+				log_file_list = []
+				log_file_list.append(time_start_thread)
+				log_file_list.append(time_end_thread) """
 
-		#time.sleep(delay)
+			#time.sleep(delay)
+			if not line:
+				users_left = False
+				
+			users = []
