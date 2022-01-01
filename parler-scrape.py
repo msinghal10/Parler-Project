@@ -55,8 +55,8 @@ def posting(username):
 		pg += 1
 
 with open(ip_file, 'r') as f:
-	n = 10
-	for users in iter(lambda: tuple(islice(f, n)), ()):
+	
+	for users in iter(lambda: tuple(islice(f, 10)), ()):
 		time_start_thread = time.time()
 
 		for user in users:
