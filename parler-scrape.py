@@ -83,7 +83,6 @@ with open(ip_file, 'r') as f:
 			for user in users:
 				lot.append(threading.Thread(target=posting, args = (user,iters, )))
 				lot[-1].start()
-				print(user)
 
 			for thread in lot:
 				thread.join() 
