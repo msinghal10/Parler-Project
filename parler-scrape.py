@@ -1,6 +1,7 @@
 import requests, sys, threading, time
 from random import randint 
 from itertools import islice
+from csv import writer
 
 #Scraping stuff
 op_file = 'data/'
@@ -84,7 +85,11 @@ with open(ip_file, 'r') as f:
 				log_file_list.append(str(iters))
 				log_file_list.append(str(time_start_thread))
 				log_file_list.append(str(time_end_thread))
+				log_file_list.append(str(delay))
 
+				writer_obj = writer(f)
+				writer_obj.writerow(log_file_list)
+				
 			time.sleep(delay)
 			if not line:
 				users_left = False
