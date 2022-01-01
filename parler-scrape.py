@@ -2,7 +2,7 @@ import requests, sys, threading, time
 from random import randint 
 from itertools import islice
 from csv import writer
-
+import json	
 #Scraping stuff
 op_file = 'data/'
 
@@ -57,7 +57,7 @@ def posting(username, iters):
 			log_list.append(username)
 			log_list.append(str(r.elapsed.total_seconds()))
 			log_list.append(str(r.status_code))
-			log_list.append(str(len(page)))
+			log_list.append(str(len(page[0])))
 			log_list.append(str(pg))
 			log_list.append(str(iters))
 			writer_obj = writer(f)
