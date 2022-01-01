@@ -8,6 +8,7 @@ op_file = 'data/'
 
 #log_file
 log_file_thread = 'logs/thread.csv'
+log_file_req = 'logs/requests.csv'
 
 #Requests stuff
 sesh = requests.session()
@@ -49,9 +50,17 @@ def posting(username, iters):
 		dt['page'] = str(pg)
 
 		r = sesh.post('https://parler.com/pages/feed.php', data = dt, headers = headers)
-
-		page = r.json()
 		
+		page = r.json()
+		with open(log_file_req, 'r') as f:
+			log_list = []
+			log_list.append(username)
+			log_list.append(r.elapsed.total_seconds())
+			log_list.append(r.status_code)
+			log_list.append(len(page))
+			log_list.append(pg)
+			log_list.append(iters)
+
 		if len(page) == 0:
 			break
 		pg += 1
