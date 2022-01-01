@@ -73,11 +73,10 @@ def posting(username, iters):
 with open(ip_file, 'r') as f:
 	users = []
 	while users_left:
-		print("Starting iter: %d\n"%iters)
+		print("Starting iter: %d"%iters)
 		line = f.readline()
-		if line:
-			users.append(line.strip())
-		elif len(users) == num_of_threads or not line:
+		
+		if len(users) == num_of_threads or not line:
 			time_start_thread = time.time()
 
 			for user in users:
@@ -106,3 +105,5 @@ with open(ip_file, 'r') as f:
 
 			users = []
 			iters += 1
+		elif line:
+			users.append(line.strip())
