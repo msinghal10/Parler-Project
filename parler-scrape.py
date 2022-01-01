@@ -88,7 +88,7 @@ with open(ip_file, 'r') as f:
 			time_end_thread = time.time()
 
 			delay = randint(2, 5)
-			with open(log_file_thread,'a+) as f:
+			with open(log_file_thread,'a+') as f:
 				log_file_list = []
 				log_file_list.append(str(iters))
 				log_file_list.append(str(time_start_thread))
