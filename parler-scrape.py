@@ -9,7 +9,6 @@ delay_lb = 1
 delay_ub = 4
 
 #log_file
-log_file_thread = 'logs/thread.csv'
 log_file_req = 'logs/requests.csv'
 
 #Requests stuff
@@ -34,7 +33,7 @@ def posting(username, iters):
 	'Accept': 'application/json, text/plain, */*',
 	'Accept-Language': 'en-US,en;q=0.5',
 	'Accept-Encoding': 'gzip, deflate, br',
-	'Referer': 'https://parler.com/user/JimJordan',
+	'Referer': 'https://parler.com/user/OANN',
 	'Content-Length': '286',
 	'Origin': 'https://parler.com',
 	'Connection': 'keep-alive',
