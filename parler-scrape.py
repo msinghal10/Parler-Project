@@ -56,7 +56,7 @@ def posting(username, iters):
 		delay=0
 		
 		if more_than_one:
-			delay = uniform(lb, ub)
+			delay = uniform(delay_lb, delay_ub)
 			time.delay(delay)
 
 		r = sesh.post('https://parler.com/pages/feed.php', data = dt, headers = headers)
