@@ -16,7 +16,7 @@ log_file_req = 'logs/requests.csv'
 sesh = requests.session()
 
 #Data file
-ip_file = '40001-61001.csv'
+ip_file = '61k-101k.csv'
 users_left = True
 
 #Threading stuff
@@ -100,7 +100,7 @@ with open(ip_file, 'r') as inp:
 
 					#Update every 30 users
 					if users_finished % 30 == 0:
-						update_api.post('https://api-parler-scrape.azurewebsites.net/update', data={'users_finished':users_finished})
+						update_api.post('https://api-parler-scrape.azurewebsites.net/update_desktop', data={'users_finished':users_finished})
 				
 					#delay = randint(delay_lb, delay_ub)
 					users_finished += 1
