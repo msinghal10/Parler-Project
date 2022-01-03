@@ -20,7 +20,7 @@ ip_file = '61k-101k.csv'
 users_left = True
 
 #Threading stuff
-num_of_threads = 16
+num_of_threads = 20
 lot = [None] * num_of_threads
 users_finished = 0
 
