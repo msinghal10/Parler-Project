@@ -1,12 +1,12 @@
 import requests, threading, time
-from random import randint 
+from random import uniform
 from csv import writer
 import json	
 
 #Scraping stuff
 op_file = 'data/'
-delay_lb = 1
-delay_ub = 4
+delay_lb = 0.1
+delay_ub = 0.5
 update_api = requests.session()
 
 #log_file
@@ -25,6 +25,8 @@ lot = [None] * num_of_threads
 users_finished = 0
 
 def posting(username, iters):
+
+	more_than_one = False
 
 	dt = {'page': '1',
 		'user': ''}
@@ -51,6 +53,12 @@ def posting(username, iters):
 	while True:
 		dt['page'] = str(pg)
 
+		delay=0
+		
+		if more_than_one:
+			delay = uniform(lb, ub)
+			time.delay(delay)
+
 		r = sesh.post('https://parler.com/pages/feed.php', data = dt, headers = headers)
 		
 		page = r.json()
@@ -61,6 +69,7 @@ def posting(username, iters):
 			log_list.append(str(r.status_code))
 			log_list.append(str(pg))
 			log_list.append(str(iters))
+			log_list.append(str(delay))
 			writer_obj = writer(f)
 			writer_obj.writerow(log_list)
 
@@ -89,10 +98,10 @@ with open(ip_file, 'r') as inp:
 
 					#update_api.post('https://api-parler-scrape.azurewebsites.net/update', data={'users_finished':users_finished})
 				
-					delay = randint(delay_lb, delay_ub)
+					#delay = randint(delay_lb, delay_ub)
 					users_finished += 1
 				
-					time.sleep(delay)
+					#time.sleep(delay)
 				
 					break 
 
