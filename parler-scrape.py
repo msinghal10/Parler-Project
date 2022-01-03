@@ -6,7 +6,7 @@ import json
 #Scraping stuff
 op_file = 'data/'
 delay_lb = 0.1
-delay_ub = 1.5
+delay_ub = 1
 update_api = requests.session()
 
 #log_file
@@ -20,7 +20,7 @@ ip_file = 'remaining.txt'
 users_left = True
 
 #Threading stuff
-num_of_threads = 10
+num_of_threads = 16
 lot = [None] * num_of_threads
 users_finished = 0
 
@@ -98,7 +98,7 @@ with open(ip_file, 'r') as inp:
 					print("Started new user: %s"%user)
 					print("Finished %d users"%users_finished)
 
-					#update_api.post('https://api-parler-scrape.azurewebsites.net/update', data={'users_finished':users_finished})
+					update_api.post('https://api-parler-scrape.azurewebsites.net/update', data={'users_finished':users_finished})
 				
 					#delay = randint(delay_lb, delay_ub)
 					users_finished += 1
