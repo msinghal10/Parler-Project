@@ -74,23 +74,27 @@ def posting(username, iters):
 with open(ip_file, 'r') as inp:
 	
 	for user in inp:
-		for i in range(num_of_threads):
-			if lot[i] == None or lot[i].is_alive() == False:
-				#Time to create a new thread
-				lot[i] = threading.Thread(target=posting, args=(user.strip(), users_finished))
-				lot[i].start()
-				#A thread has been assigned to the new user, move on to another user
+		user_assigned = False 
+		while user_assigned == False:
+			for i in range(num_of_threads):
+				if lot[i] == None or lot[i].is_alive() == False:
+					#Time to create a new thread
+					lot[i] = threading.Thread(target=posting, args=(user.strip(), users_finished))
+					lot[i].start()
+					user_assigned = True
+					#A thread has been assigned to the new user, move on to another user
 				
-				print("Started new user: %s", user)
-				print("Finished %d users", users_finished)
+					print("Started new user: %s", user)
+					print("Finished %d users", users_finished)
 
-				#update_api.post('https://api-parler-scrape.azurewebsites.net/update', data={'users_finished':users_finished})
+					#update_api.post('https://api-parler-scrape.azurewebsites.net/update', data={'users_finished':users_finished})
 				
-				delay = randint(delay_lb, delay_ub)
-				users_finished += 1
+					delay = randint(delay_lb, delay_ub)
+					users_finished += 1
 				
-				time.sleep(delay)
-				break 
+					time.sleep(delay)
+				
+					break 
 
 #Waiting for all final 10 threads to finish
 for thread in lot:
