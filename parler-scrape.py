@@ -6,7 +6,7 @@ import json
 #Scraping stuff
 op_file = 'data/'
 delay_lb = 0.1
-delay_ub = 0.5
+delay_ub = 1.5
 update_api = requests.session()
 
 #log_file
@@ -61,6 +61,8 @@ def posting(username, iters):
 
 		r = sesh.post('https://parler.com/pages/feed.php', data = dt, headers = headers)
 		
+		more_than_one = True
+
 		page = r.json()
 		with open(log_file_req, 'a+') as f:
 			log_list = []
