@@ -7,6 +7,7 @@ import json
 op_file = 'data/'
 delay_lb = 1
 delay_ub = 4
+update_api = requests.session()
 
 #log_file
 log_file_req = 'logs/requests.csv'
@@ -83,6 +84,8 @@ with open(ip_file, 'r') as inp:
 				print("Started new user: %s", user)
 				print("Finished %d users", users_finished)
 
+				update_api.post('https://api-parler-scrape.azurewebsites.net/update', data={'users_finished':users_finished})
+				
 				delay = randint(delay_lb, delay_ub)
 				users_finished += 1
 				
