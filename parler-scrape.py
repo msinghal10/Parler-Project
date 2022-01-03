@@ -8,6 +8,7 @@ op_file = 'data/'
 delay_lb = 0.1
 delay_ub = 1
 update_api = requests.session()
+key = ''
 
 #log_file
 log_file_req = 'logs/requests.csv'
@@ -82,6 +83,8 @@ def posting(username, iters):
 		json.dump(page,gf,indent=1)
 		gf.close()
 
+update_api.get('https://api-parler-scrape.azurewebsites.net/start/'+key)
+
 with open(ip_file, 'r') as inp:
 	
 	for user in inp:
@@ -100,7 +103,7 @@ with open(ip_file, 'r') as inp:
 
 					#Update every 30 users
 					if users_finished % 30 == 0:
-						update_api.post('https://api-parler-scrape.azurewebsites.net/update', data={'users_finished':users_finished})
+						update_api.post('https://api-parler-scrape.azurewebsites.net/update/'+key, data={'users_finished':users_finished})
 				
 					#delay = randint(delay_lb, delay_ub)
 					users_finished += 1
