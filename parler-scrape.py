@@ -98,7 +98,9 @@ with open(ip_file, 'r') as inp:
 					print("Started new user: %s"%user)
 					print("Finished %d users"%users_finished)
 
-					update_api.post('https://api-parler-scrape.azurewebsites.net/update', data={'users_finished':users_finished})
+					#Update every 30 users
+					if users_finished % 30 == 0:
+						update_api.post('https://api-parler-scrape.azurewebsites.net/update', data={'users_finished':users_finished})
 				
 					#delay = randint(delay_lb, delay_ub)
 					users_finished += 1
