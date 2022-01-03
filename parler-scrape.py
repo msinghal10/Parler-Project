@@ -1,13 +1,15 @@
-import requests, sys, threading, time
+import requests, threading, time
 from random import randint 
-from itertools import islice
 from csv import writer
 import json	
+
 #Scraping stuff
 op_file = 'data/'
+delay_lb = 1
+delay_ub = 4
+update_api = requests.session()
 
 #log_file
-log_file_thread = 'logs/thread.csv'
 log_file_req = 'logs/requests.csv'
 
 #Requests stuff
@@ -18,9 +20,9 @@ ip_file = '40kf.csv'
 users_left = True
 
 #Threading stuff
-lot = []
 num_of_threads = 10
-iters = 1
+lot = [None] * num_of_threads
+users_finished = 0
 
 def posting(username, iters):
 
@@ -32,7 +34,7 @@ def posting(username, iters):
 	'Accept': 'application/json, text/plain, */*',
 	'Accept-Language': 'en-US,en;q=0.5',
 	'Accept-Encoding': 'gzip, deflate, br',
-	'Referer': 'https://parler.com/user/JimJordan',
+	'Referer': 'https://parler.com/user/OANN',
 	'Content-Length': '286',
 	'Origin': 'https://parler.com',
 	'Connection': 'keep-alive',
@@ -69,39 +71,27 @@ def posting(username, iters):
 		json.dump(page,gf,indent=1)
 		gf.close()
 
-with open(ip_file, 'r') as f:
-	users = []
-	while users_left:
-		print("Starting iter: %d"%iters)
-		line = f.readline()
-		
-		if len(users) == num_of_threads or not line:
-			time_start_thread = time.time()
-			for user in users:
-				lot.append(threading.Thread(target=posting, args = (user,iters, )))
-				lot[-1].start()
-
-			for thread in lot:
-				thread.join() 
-
-			time_end_thread = time.time()
-
-			delay = randint(2, 5)
-			with open(log_file_thread,'a+') as log:
-				log_file_list = []
-				log_file_list.append(str(iters))
-				log_file_list.append(str(time_start_thread))
-				log_file_list.append(str(time_end_thread))
-				log_file_list.append(str(delay))
-
-				writer_obj = writer(log)
-				writer_obj.writerow(log_file_list)
+with open(ip_file, 'r') as inp:
+	
+	for user in inp:
+		for i in range(num_of_threads):
+			if lot[i] == None or lot[i].is_alive() == False:
+				#Time to create a new thread
+				lot[i] = threading.Thread(target=posting, args=(user.strip(), users_finished))
+				lot[i].start()
+				#A thread has been assigned to the new user, move on to another user
 				
-			time.sleep(delay)
-			if not line:
-				users_left = False
+				print("Started new user: %s", user)
+				print("Finished %d users", users_finished)
 
-			users = []
-			iters += 1
-		elif line:
-			users.append(line.strip())
+				update_api.post('https://api-parler-scrape.azurewebsites.net/update', data={'users_finished':users_finished})
+				
+				delay = randint(delay_lb, delay_ub)
+				users_finished += 1
+				
+				time.sleep(delay)
+				break 
+
+#Waiting for all final 10 threads to finish
+for thread in lot:
+	thread.join()
