@@ -17,11 +17,11 @@ log_file_req = 'logs/requests.csv'
 sesh = requests.session()
 
 #Data file
-ip_file = 'remaining.txt'
+ip_file = '61k-101k.csv'
 users_left = True
 
 #Threading stuff
-num_of_threads = 16
+num_of_threads = 20
 lot = [None] * num_of_threads
 users_finished = 0
 
@@ -41,7 +41,7 @@ def posting(username, iters):
 	'Content-Length': '286',
 	'Origin': 'https://parler.com',
 	'Connection': 'keep-alive',
-	'Cookie': '_pk_id.1.4eb6=c537e2ceea449bd0.1639087612.; _jsuid=962679935; _pk_ses.1.4eb6=1; _first_pageview=1; heatmaps_g2g_101336175=yes; PHPSESSID=72vu1ej2quuv9shl86umbsu3n5; parler_auth_token=d674d85888a0bbd5bb15f4defda2ee41540fdb5d748f8a6d0a9e635ead9bcf70',
+	'Cookie': 'PHPSESSID=0oo72sl4i5c8mh9o5t6lldu2mk; _pk_ref.1.4eb6=%5B%22%22%2C%22%22%2C1641176737%2C%22https%3A%2F%2Fwww.google.com%2F%22%5D; _pk_id.1.4eb6=3ff8d938311a192e.1641176737.; parler_auth_token=ccd5698fe59986249f55154564fb6a8df477f3d624f59309a8131bdd26cec684',
 	'Sec-Fetch-Dest': 'empty',
 	'Sec-Fetch-Mode': 'no-cors',
 	'Sec-Fetch-Site': 'same-origin',
