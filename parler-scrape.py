@@ -95,8 +95,8 @@ with open(ip_file, 'r') as inp:
 					user_assigned = True
 					#A thread has been assigned to the new user, move on to another user
 				
-					print("Started new user: %s", user)
-					print("Finished %d users", users_finished)
+					print("Started new user: %s"%user)
+					print("Finished %d users"%users_finished)
 
 					#update_api.post('https://api-parler-scrape.azurewebsites.net/update', data={'users_finished':users_finished})
 				
