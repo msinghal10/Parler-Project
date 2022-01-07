@@ -3,6 +3,7 @@ from random import uniform
 from csv import writer
 import json	
 import settings 
+from subprocess import check_output
 
 #Scraping stuff
 op_file = 'data/'
@@ -10,6 +11,7 @@ delay_lb = 0.1
 delay_ub = 1
 update_api = requests.session()
 key = ''
+name = ''
 
 #log_file
 log_file_req = 'logs/requests.csv'
@@ -34,6 +36,15 @@ if settings.config_exists() == False:
 		print('Could not run program without settings file')
 		quit()
 
+#Read setings file and initialize new job with API
+else:
+	print("Settings file found!")
+	config = settings.read_config()
+	num_of_threads = config['threads']
+	name = config['name']
+	delay_lb = config['delay_lb']
+	delay_ub = config['delay_ub']
+
 #Scan for csv files
 files = settings.read_input_file_candidates()
 print('Found %d input files'%len(files))
@@ -41,10 +52,14 @@ print('Found %d input files'%len(files))
 for x in files:
 	print(x)
 
-ip_file = files[int(input('Enter file number: '))]
+ip_file = files[int(input('Enter file number(0-n): '))]
 print("Input file: %s"%ip_file)
 
-#Read setings file and initialize new job with API
+cmd = 'wc -l %s'
+total_users = check_output(cmd%ip_file, shell=True).decode().split()[0]
+print("Total users to scrape: %d"%total_users)
+
+input("Enter any key to start scraping")
 
 def posting(username, iters):
 
