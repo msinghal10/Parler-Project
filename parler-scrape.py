@@ -46,6 +46,7 @@ else:
 	delay_lb = config['delay_lb']
 	delay_ub = config['delay_ub']
 	cookies = config['cookies']
+	key = config['key']
 
 #Scan for csv files
 files = settings.read_input_file_candidates()
