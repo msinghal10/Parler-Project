@@ -18,7 +18,7 @@ log_file_req = 'logs/requests.csv'
 sesh = requests.session()
 
 #Data file
-ip_file = '61k-101k.csv'
+ip_file = ''
 users_left = True
 
 #Threading stuff
@@ -33,6 +33,10 @@ if settings.config_exists() == False:
 	else:
 		print('Could not run program without settings file')
 		quit()
+
+#Scan for csv files
+files = settings.read_input_file_candidates()
+print('Found %d input files'%len(files))
 
 #Read setings file and initialize new job with API
 

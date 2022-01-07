@@ -2,3 +2,5 @@
 .parler-scraper
 .settings.json
 __pycache__
+*.csv
+.venv
