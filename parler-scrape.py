@@ -18,6 +18,7 @@ log_file_req = 'logs/requests.csv'
 
 #Requests stuff
 sesh = requests.session()
+cookies = ''
 
 #Data file
 ip_file = ''
@@ -44,6 +45,7 @@ else:
 	name = config['name']
 	delay_lb = config['delay_lb']
 	delay_ub = config['delay_ub']
+	cookies = config['cookies']
 
 #Scan for csv files
 files = settings.read_input_file_candidates()
@@ -77,7 +79,7 @@ def posting(username, iters):
 	'Content-Length': '286',
 	'Origin': 'https://parler.com',
 	'Connection': 'keep-alive',
-	'Cookie': 'PHPSESSID=0oo72sl4i5c8mh9o5t6lldu2mk; parler_auth_token=ccd5698fe59986249f55154564fb6a8df477f3d624f59309a8131bdd26cec684',
+	'Cookie': cookies,
 	'Sec-Fetch-Dest': 'empty',
 	'Sec-Fetch-Mode': 'no-cors',
 	'Sec-Fetch-Site': 'same-origin',
