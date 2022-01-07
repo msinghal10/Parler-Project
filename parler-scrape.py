@@ -38,6 +38,12 @@ if settings.config_exists() == False:
 files = settings.read_input_file_candidates()
 print('Found %d input files'%len(files))
 
+for x in files:
+	print(x)
+
+ip_file = files[int(input('Enter file number: '))]
+print("Input file: %s"%ip_file)
+
 #Read setings file and initialize new job with API
 
 def posting(username, iters):
@@ -56,7 +62,7 @@ def posting(username, iters):
 	'Content-Length': '286',
 	'Origin': 'https://parler.com',
 	'Connection': 'keep-alive',
-	'Cookie': 'PHPSESSID=0oo72sl4i5c8mh9o5t6lldu2mk; _pk_ref.1.4eb6=%5B%22%22%2C%22%22%2C1641176737%2C%22https%3A%2F%2Fwww.google.com%2F%22%5D; _pk_id.1.4eb6=3ff8d938311a192e.1641176737.; parler_auth_token=ccd5698fe59986249f55154564fb6a8df477f3d624f59309a8131bdd26cec684',
+	'Cookie': 'PHPSESSID=0oo72sl4i5c8mh9o5t6lldu2mk; parler_auth_token=ccd5698fe59986249f55154564fb6a8df477f3d624f59309a8131bdd26cec684',
 	'Sec-Fetch-Dest': 'empty',
 	'Sec-Fetch-Mode': 'no-cors',
 	'Sec-Fetch-Site': 'same-origin',
