@@ -2,6 +2,7 @@ import requests, threading, time
 from random import uniform
 from csv import writer
 import json	
+import settings 
 
 #Scraping stuff
 op_file = 'data/'
@@ -24,6 +25,16 @@ users_left = True
 num_of_threads = 20
 lot = [None] * num_of_threads
 users_finished = 0
+
+#Check/Make settings for each instance
+if settings.config_exists() == False:
+	if input('No settings file found. Do you want to create a settings file?(y/n)') == 'y':
+		settings.generate_config()
+	else:
+		print('Could not run program without settings file')
+		quit()
+
+#Read setings file and initialize new job with API
 
 def posting(username, iters):
 
