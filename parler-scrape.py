@@ -60,7 +60,7 @@ print("Input file: %s"%ip_file)
 
 cmd = 'wc -l %s'
 total_users = check_output(cmd%ip_file, shell=True).decode().split()[0]
-print("Total users to scrape: %d"%total_users)
+print("Total users to scrape: %s"%total_users)
 
 input("Enter any key to start scraping")
 
