@@ -26,7 +26,7 @@ users_left = True
 
 #Threading stuff
 num_of_threads = 20
-lot = [None] * num_of_threads
+
 users_finished = 0
 
 #Check/Make settings for each instance
@@ -47,7 +47,7 @@ else:
 	delay_ub = config['delay_ub']
 	cookies = config['cookies']
 	key = config['key']
-
+lot = [None] * num_of_threads
 #Scan for csv files
 files = settings.read_input_file_candidates()
 print('Found %d input files'%len(files))
@@ -68,8 +68,7 @@ def posting(username, iters):
 
 	more_than_one = False
 
-	dt = {'page': '1',
-		'user': ''}
+	dt = {'user': ''}
 
 	headers = {'Host': 'parler.com',
 	'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:95.0) Gecko/20100101 Firefox/95.0',
@@ -87,40 +86,31 @@ def posting(username, iters):
 	'Cache-Control': 'max-age=0, no-cache',
 	'Pragma': 'no-cache'}
 
-	pg = 1
 	dt['user'] = username
 
 	while True:
-		dt['page'] = str(pg)
 
-		delay=0
+		delay = 0
+
+		r = sesh.post('https://parler.com/pages/profile/view.php', data = dt, headers = headers)
 		
-		if more_than_one:
-			delay = uniform(delay_lb, delay_ub)
-			time.sleep(delay)
 
-		r = sesh.post('https://parler.com/pages/feed.php', data = dt, headers = headers)
 		
-		more_than_one = True
-
-		page = r.json()
 		with open(log_file_req, 'a+') as f:
 			log_list = []
 			log_list.append(username)
 			log_list.append(str(r.elapsed.total_seconds()))
 			log_list.append(str(r.status_code))
-			log_list.append(str(pg))
 			log_list.append(str(iters))
 			log_list.append(str(delay))
 			writer_obj = writer(f)
 			writer_obj.writerow(log_list)
 
-		if len(page) == 0:
-			break
-		pg += 1
+		page = r.json()
 		gf = open(op_file+username+".json", "a+")
 		json.dump(page,gf,indent=1)
 		gf.close()
+		break
 
 update_api.get('https://api-parler-scrape.azurewebsites.net/start/'+key)
 
@@ -137,13 +127,13 @@ with open(ip_file, 'r') as inp:
 					user_assigned = True
 					#A thread has been assigned to the new user, move on to another user
 				
-					print("Started new user: %s"%user)
-					print("Finished %d users"%users_finished)
+					#print("Started new user: %s"%user)
+					#print("Finished %d users"%users_finished)
 
 					#Update every 30 users
 					if users_finished % 30 == 0:
 						update_api.post('https://api-parler-scrape.azurewebsites.net/update/'+key, data={'users_finished':users_finished})
-				
+						print('Finished %d users'%users_finished)
 					#delay = randint(delay_lb, delay_ub)
 					users_finished += 1
 				
