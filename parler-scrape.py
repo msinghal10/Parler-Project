@@ -115,12 +115,14 @@ def posting(username, iters):
 			writer_obj = writer(f)
 			writer_obj.writerow(log_list)
 
-		if len(page) == 0:
+		if len(page) == 0 and pg != 1:
 			break
+
 		pg += 1
 		gf = open(op_file+username+".json", "a+")
 		json.dump(page,gf,indent=1)
 		gf.close()
+
 
 update_api.get('https://api-parler-scrape.azurewebsites.net/start/'+key)
 
@@ -137,8 +139,8 @@ with open(ip_file, 'r') as inp:
 					user_assigned = True
 					#A thread has been assigned to the new user, move on to another user
 				
-					print("Started new user: %s"%user)
-					print("Finished %d users"%users_finished)
+					if users_finished % 30 == 0:
+						print("Finished %d users"%users_finished)
 
 					#Update every 30 users
 					if users_finished % 30 == 0:
