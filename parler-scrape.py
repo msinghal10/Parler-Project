@@ -20,13 +20,10 @@ log_file_req = 'logs/requests.csv'
 sesh = requests.session()
 cookies = ''
 
-#Data file
-ip_file = ''
-users_left = True
-
 #Threading stuff
 num_of_threads = 35
 lot = [None] * num_of_threads
+
 users_finished = 0
 
 #Check/Make settings for each instance
@@ -47,23 +44,6 @@ else:
 	delay_ub = config['delay_ub']
 	cookies = config['cookies']
 	key = config['key']
-
-#Scan for csv files
-files = settings.read_input_file_candidates()
-print('Found %d input files'%len(files))
-
-for x in files:
-	print(x)
-
-#ip_file = files[int(input('Enter file number(0-n): '))]
-ip_file = files[0]
-print("Input file: %s"%ip_file)
-
-cmd = 'wc -l %s'
-total_users = check_output(cmd%ip_file, shell=True).decode().split()[0]
-print("Total users to scrape: %s"%total_users)
-
-#input("Enter any key to start scraping")
 
 def posting(username, iters):
 
@@ -94,13 +74,7 @@ def posting(username, iters):
 	while True:
 		dt['page'] = str(pg)
 
-		delay=0
-		
-		if more_than_one:
-			delay = uniform(delay_lb, delay_ub)
-			time.sleep(delay)
-
-		r = sesh.post('https://parler.com/pages/feed.php', data = dt, headers = headers)
+		r = sesh.post('https://parler.com/functions/trending_users.php', headers = headers)
 		
 		more_than_one = True
 
@@ -116,44 +90,25 @@ def posting(username, iters):
 			writer_obj = writer(f)
 			writer_obj.writerow(log_list)
 
-		if len(page) == 0 and pg != 1:
-			break
-
 		pg += 1
-		gf = open(op_file+username+".json", "a+")
+		file_name = str(time.time())
+		gf = open(op_file+file_name+".json", "a+")
 		json.dump(page,gf,indent=1)
 		gf.close()
+
+		break
 
 
 update_api.get('https://api-parler-scrape.azurewebsites.net/start/'+key)
 
-with open(ip_file, 'r') as inp:
-	
-	for user in inp:
-		user_assigned = False 
-		while user_assigned == False:
-			for i in range(num_of_threads):
-				if lot[i] == None or lot[i].is_alive() == False:
-					#Time to create a new thread
-					lot[i] = threading.Thread(target=posting, args=(user.strip(), users_finished))
-					lot[i].start()
-					user_assigned = True
-					#A thread has been assigned to the new user, move on to another user
-				
-					if users_finished % 30 == 0:
-						print("Finished %d users"%users_finished)
+while True:
+	posting(name, 0)
+	delay = uniform(delay_lb, delay_ub)
+	print('Waiting for %d'%delay)
+	time.sleep(delay)
 
-					#Update every 30 users
-					if users_finished % 30 == 0:
-						update_api.post('https://api-parler-scrape.azurewebsites.net/update/'+key, data={'users_finished':users_finished})
-				
-					#delay = randint(delay_lb, delay_ub)
-					users_finished += 1
-				
-					#time.sleep(delay)
-				
-					break 
+	users_finished += 1
 
-#Waiting for all final 10 threads to finish
-for thread in lot:
-	thread.join()
+	update_api.post('https://api-parler-scrape.azurewebsites.net/update/'+key, data={'users_finished':users_finished})
+	print('Finished %d users'%users_finished)
+
