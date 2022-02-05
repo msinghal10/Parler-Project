@@ -25,7 +25,7 @@ ip_file = ''
 users_left = True
 
 #Threading stuff
-num_of_threads = 20
+num_of_threads = 35
 lot = [None] * num_of_threads
 users_finished = 0
 
@@ -55,14 +55,15 @@ print('Found %d input files'%len(files))
 for x in files:
 	print(x)
 
-ip_file = files[int(input('Enter file number(0-n): '))]
+#ip_file = files[int(input('Enter file number(0-n): '))]
+ip_file = files[0]
 print("Input file: %s"%ip_file)
 
 cmd = 'wc -l %s'
 total_users = check_output(cmd%ip_file, shell=True).decode().split()[0]
 print("Total users to scrape: %s"%total_users)
 
-input("Enter any key to start scraping")
+#input("Enter any key to start scraping")
 
 def posting(username, iters):
 
