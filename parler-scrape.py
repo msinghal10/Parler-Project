@@ -74,7 +74,7 @@ def posting(username, iters):
 	while True:
 		dt['page'] = str(pg)
 
-		r = sesh.post('https://parler.com/functions/trending_users.php', headers = headers)
+		r = sesh.post('https://parler.com/functions/trending_users.php', data = dt, headers = headers)
 		
 		more_than_one = True
 
@@ -86,7 +86,7 @@ def posting(username, iters):
 			log_list.append(str(r.status_code))
 			log_list.append(str(pg))
 			log_list.append(str(iters))
-			log_list.append(str(delay))
+			#log_list.append(str(delay))
 			writer_obj = writer(f)
 			writer_obj.writerow(log_list)
 
@@ -104,7 +104,7 @@ update_api.get('https://api-parler-scrape.azurewebsites.net/start/'+key)
 while True:
 	posting(name, 0)
 	delay = uniform(delay_lb, delay_ub)
-	print('Waiting for %d'%delay)
+	print(delay)
 	time.sleep(delay)
 
 	users_finished += 1
