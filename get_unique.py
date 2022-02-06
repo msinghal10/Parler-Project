@@ -19,8 +19,11 @@ for file in list_of_files:
 				continue
 			else:
 				usernames.append(entry['username'])
-				
+
 	print('Files finished %d'%file_current)
 	file_current += 1
 
-print(len(usernames))
+with open('test.txt', 'w') as f:
+	for line in usernames:
+		f.write(line)
+		f.write('\n')
