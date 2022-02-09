@@ -121,6 +121,8 @@ def posting(username, iters):
 			json.dump(page,gf,indent=1)
 			gf.close()
 			break
+		elif len(page) == 0:
+			break
 
 		pg += 1
 		gf = open(op_file+username+".json", "a+")
