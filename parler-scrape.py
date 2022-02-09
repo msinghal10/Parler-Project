@@ -55,15 +55,15 @@ print('Found %d input files'%len(files))
 for x in files:
 	print(x)
 
-#ip_file = files[int(input('Enter file number(0-n): '))]
-ip_file = files[0]
+ip_file = files[int(input('Enter file number(0-n): '))]
+
 print("Input file: %s"%ip_file)
 
 cmd = 'wc -l %s'
 total_users = check_output(cmd%ip_file, shell=True).decode().split()[0]
 print("Total users to scrape: %s"%total_users)
 
-#input("Enter any key to start scraping")
+input("Enter any key to start scraping")
 
 def posting(username, iters):
 
@@ -116,7 +116,10 @@ def posting(username, iters):
 			writer_obj = writer(f)
 			writer_obj.writerow(log_list)
 
-		if len(page) == 0 and pg != 1:
+		if len(page) == 0 && pg == 1:
+			gf = open(op_file+username+".json", "a+")
+			json.dump(page,gf,indent=1)
+			gf.close()
 			break
 
 		pg += 1
