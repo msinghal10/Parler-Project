@@ -116,18 +116,20 @@ def posting(username, iters):
 			writer_obj = writer(f)
 			writer_obj.writerow(log_list)
 
-		if len(page) == 0 && pg == 1:
+		if len(page) == 0 and pg == 1:
 			gf = open(op_file+username+".json", "a+")
 			json.dump(page,gf,indent=1)
 			gf.close()
 			break
+
 		elif len(page) == 0:
 			break
-
-		pg += 1
-		gf = open(op_file+username+".json", "a+")
-		json.dump(page,gf,indent=1)
-		gf.close()
+			
+		else:
+			pg += 1
+			gf = open(op_file+username+".json", "a+")
+			json.dump(page,gf,indent=1)
+			gf.close()
 
 
 update_api.get('https://api-parler-scrape.azurewebsites.net/start/'+key)
