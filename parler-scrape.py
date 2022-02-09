@@ -45,12 +45,12 @@ else:
 	cookies = config['cookies']
 	key = config['key']
 
-def posting(username, iters):
+def posting(pg):
 
 	more_than_one = False
 
-	dt = {'page': '1',
-		'user': ''}
+	dt = {'page': pg,
+		'discover': True}
 
 	headers = {'Host': 'parler.com',
 	'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:95.0) Gecko/20100101 Firefox/95.0',
@@ -68,31 +68,27 @@ def posting(username, iters):
 	'Cache-Control': 'max-age=0, no-cache',
 	'Pragma': 'no-cache'}
 
-	pg = 1
-	dt['user'] = username
-
 	while True:
-		dt['page'] = str(pg)
 
-		r = sesh.post('https://parler.com/functions/trending_users.php', data = dt, headers = headers)
+		r = sesh.post('https://parler.com/pages/feed.php', data = dt, headers = headers)
 		
 		more_than_one = True
 
 		page = r.json()
 		with open(log_file_req, 'a+') as f:
 			log_list = []
-			log_list.append(username)
+			#log_list.append(username)
 			log_list.append(str(r.elapsed.total_seconds()))
 			log_list.append(str(r.status_code))
-			log_list.append(str(pg))
-			log_list.append(str(iters))
+			#log_list.append(str(pg))
+			#log_list.append(str(iters))
 			#log_list.append(str(delay))
 			writer_obj = writer(f)
 			writer_obj.writerow(log_list)
 
-		pg += 1
+		#pg += 1
 		file_name = str(time.time())
-		gf = open(op_file+file_name+".json", "a+")
+		gf = open(op_file+file_name+'_'+str(pg)+".json", "a+")
 		json.dump(page,gf,indent=1)
 		gf.close()
 
@@ -101,14 +97,12 @@ def posting(username, iters):
 
 update_api.get('https://api-parler-scrape.azurewebsites.net/start/'+key)
 
-while True:
-	posting(name, 0)
+for i in range(1, 271):
+	posting(i)
 	delay = uniform(delay_lb, delay_ub)
-	print(delay)
 	time.sleep(delay)
 
 	users_finished += 1
-
 	update_api.post('https://api-parler-scrape.azurewebsites.net/update/'+key, data={'users_finished':users_finished})
 	print('Finished %d users'%users_finished)
 
