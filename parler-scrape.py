@@ -26,7 +26,7 @@ users_left = True
 
 #Threading stuff
 num_of_threads = 35
-lot = [None] * num_of_threads
+
 users_finished = 0
 
 #Check/Make settings for each instance
@@ -47,7 +47,7 @@ else:
 	delay_ub = config['delay_ub']
 	cookies = config['cookies']
 	key = config['key']
-
+lot = [None] * num_of_threads
 #Scan for csv files
 files = settings.read_input_file_candidates()
 print('Found %d input files'%len(files))
